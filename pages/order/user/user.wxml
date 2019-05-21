@@ -1,0 +1,28 @@
+<!--pages/order/user/user.wxml-->
+<view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-form-group">
+      <view class='title'>门店</view>
+      <picker bindchange="companyChange" range="{{companylist}}" range-key="{{'name'}}">
+        <view class="picker text-grey">
+          {{ companyText ||'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>姓名</view>
+      <input placeholder="请输入你的姓名" class='radius' name='input' bindinput="nameChange"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>查询手机号</view>
+      <input type="number" placeholder="请输入你的手机号" class='radius' name='input' bindinput="phoneChange"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>身份证号</view>
+      <input placeholder="请输入你的身份证号" class='radius' name='input' bindinput="idChange"></input>
+    </view>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class='cu-btn bg-blue margin-tb-sm lg' catchtap='submitData'>点击查询</button>
+  </view>
+</view>

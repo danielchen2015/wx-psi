@@ -1,0 +1,8 @@
+.goods-title{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.m-l-10{
+  margin-left: 20rpx;
+}

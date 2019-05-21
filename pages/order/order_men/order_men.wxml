@@ -1,0 +1,55 @@
+<view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-form-group">
+      <view class='title'>订货门店</view>
+      <picker bindchange="storeChange" range="{{storelist}}" range-key="{{'name'}}">
+        <view class="picker text-grey">
+        {{storeText||'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>要求到货时间</view>
+      <picker bindchange="timeChange" mode="date" start="{{startTime}}" end="{{endTime}}">
+        <view class="picker text-grey">
+          {{selectTime ||'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>订单模板</view>
+      <picker bindchange="templateChange" range="{{templatelist}}" range-key="{{'bill_memo'}}">
+        <view class="picker text-grey">
+          {{ templateText|| '请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>收货地址</view>
+      <input placeholder="请输入你的备注信息" class='radius' name='input' bindinput="memoChange"></input>
+    </view>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='text-orange'>物品列表-(右边滑动删除)</text>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{goodsList}}" wx:key="goods_id" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
+      <view class="goods-title">
+        <view>{{item.name}}</view>
+        <view class="m-l-10">
+          <input type="number" bindinput="dataChange" data-good="{{item.goods_id}}" placeholder="请输入需要的数量" class="input-number" name='input' type="number"></input>
+        </view>
+        <view>/{{item.unit_name}}</view>
+      </view>
+      <view class='move'>
+        <!-- <view class='bg-grey'>置顶</view> -->
+        <view class="bg-red" data-code="{{item.goods_id}}" catchtap="deleGoods">删除</view>
+      </view>
+    </view>
+  </view>
+  <view class="padding flex flex-direction">
+  <button class='cu-btn bg-blue margin-tb-sm lg' catchtap='submitData'>点击发送</button>
+</view>
+</view>

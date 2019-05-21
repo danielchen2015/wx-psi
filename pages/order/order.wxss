@@ -1,0 +1,19 @@
+.text-center{
+  text-align: center;
+}
+.order-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.imgIcon{
+  width: 92rpx;
+  height: 92rpx;
+  padding: 16rpx;
+  border-radius: 4px;
+  background-color: #5e97f6;
+}
+.imgIcon image{
+  height: 60rpx;
+}

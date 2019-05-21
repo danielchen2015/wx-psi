@@ -1,0 +1,36 @@
+<!--pages/order/detail/detail.wxml-->
+<view>
+   <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg" wx:for="{{userinfo}}" wx:key="{{item.id}}">
+    <view class="cu-form-group">
+      <view class='title'>姓名</view>
+      <view>
+        <text>{{item.name || '没有查到'}}</text>
+      </view>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>工号</view>
+      <view>
+        <text>{{item.emplyee_no || '没有查到'}}</text>
+      </view>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>联系方式</view>
+     <view>
+        <text>{{item.contactno || '没有查到'}}</text>
+      </view>
+    </view>
+
+     <view class="cu-form-group">
+      <view class='title'>入职时间</view>
+       <view>
+        <text>{{item.starttime || '没有查到'}}</text>
+      </view>
+    </view>
+     <view class="cu-form-group">
+      <view class='title'>离职时间</view>
+      <view>
+        <text>{{item.level_date || '没有查到'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

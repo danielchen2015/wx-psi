@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/order/order",
+    "pages/home/home",
+    "pages/order/order_men/order_men",
+    "pages/order/user/user",
+    "pages/order/detail/detail",
+    "pages/test/test",
+    "pages/user/user"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {},
+  "tabBar": {
+    "color": "#919191",
+    "selectedColor": "#39b54a",
+    "backgroundColor": "#fafafa",
+    "borderStyle": "white",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "/images/tabar/basics.png",
+        "selectedIconPath": "/images/tabar/basics_cur.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "订货",
+        "iconPath": "/images/tabar/component.png",
+        "selectedIconPath": "/images/tabar/component_cur.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的",
+        "iconPath": "/images/tabar/about.png",
+        "selectedIconPath": "/images/tabar/about_cur.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}
