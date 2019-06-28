@@ -7,7 +7,7 @@
   <view class="cu-list grid col-{{2}}">
     <view class="cu-item order-item">
       <navigator url="/pages/order/order_men/order_men" hover-class="none">
-        <image mode='aspectFit' src='/images/order/huo.png' class='imgIcon'></image>
+        <image mode='aspectFit' src='/images/order/order.png' class='imgIcon'></image>
         <text>订货</text>
       </navigator>
     </view>
@@ -17,13 +17,13 @@
         <text>查询员工信息</text>
         </navigator>
     </view>
-    <view wx:if="{{false}}" class="cu-item order-item">
-
+    <view class="cu-item order-item">
+      <navigator url="/pages/order/order_men/order_in">
       <view class='imgIcon'>
-        <image mode='aspectFit' src='/images/order/huo.png'></image>
+        <image mode='aspectFit' src='/images/order/orderin.png'></image>
       </view>
-      <text>入库</text>
-
+      <text>发货</text>
+      </navigator>
     </view>
     <view wx:if="{{false}}" class="cu-item order-item">
       <view class='imgIcon'>

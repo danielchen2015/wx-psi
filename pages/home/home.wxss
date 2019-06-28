@@ -1,0 +1,7 @@
+.title-login{
+  width: 100%;
+  height: 300rpx;
+  line-height: 300rpx;
+  text-align: center;
+  font-size: 30px;
+}

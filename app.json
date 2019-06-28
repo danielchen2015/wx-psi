@@ -1,8 +1,9 @@
 {
   "pages": [
-    "pages/order/order",
     "pages/home/home",
+    "pages/order/order",
     "pages/order/order_men/order_men",
+    "pages/order/order_men/order_in",
     "pages/order/user/user",
     "pages/order/detail/detail",
     "pages/test/test",
@@ -11,7 +12,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "万岛云系统",
     "navigationBarTextStyle": "black"
   },
   "usingComponents": {},

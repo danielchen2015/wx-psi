@@ -1,9 +1,14 @@
+import http from '../../utils/http.js';
+let app = getApp();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    loginShow:true,
+    username:"",
+    password:"",
     iconList: [{
       icon: 'cardboardfill',
       color: 'red',
@@ -61,7 +66,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    wx.hideTabBar({})
   },
 
   /**
@@ -111,5 +116,54 @@ Page({
    */
   onShareAppMessage: function () {
     
+  },
+  handUsername(e){
+    this.setData({
+      username: e.detail.value
+    })
+  },
+  handPassword(e){
+    this.setData({
+      password: e.detail.value
+    })
+  },
+  handLogin(){
+    let that = this;
+    http({
+      url: '/api/user/login',
+      data:{
+        username: that.data.username,
+        password: that.data.password
+      },
+      success: function(res){
+        let { code,data} = res;
+        if(code == 200 && data.length){
+          getApp().globalData.id = data[0].id;
+          getApp().globalData.companyid = data[0].company_id;
+          getApp().globalData.username = data[0].name;
+         that.setData({
+           loginShow: false
+         })
+          wx.showModal({
+            title: '提示',
+            content: '登录成功',
+            showCancel:false,
+            success(res) {
+              if (res.confirm) {
+                wx.switchTab({
+                  url: '/pages/order/order'
+                })
+              }
+            }
+          })
+         
+        }
+       
+      },
+      fail: function(){
+        getApp().globalData.id = "";
+        getApp().globalData.companyid = "";
+      }
+    })
   }
 })

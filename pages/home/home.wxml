@@ -1,1 +1,20 @@
-<view></view>
+<view>
+
+  <view class='login' wx:if="{{loginShow}}">
+      <view class='title-login'>
+        <text>登录</text>
+      </view>
+    	<view class="cu-form-group margin-top">
+        <view class="title">用户名:</view>
+        <input placeholder="请输入用户名" bindinput='handUsername'></input>
+	    </view>
+      <view class="cu-form-group">
+        <view class="title">密码:</view>
+        <input type='password'  placeholder="请输入密码" bindinput='handPassword'></input>
+      </view>
+      <view class="padding-xl">
+        <button class="cu-btn block bg-blue margin-tb-sm lg" bindtap='handLogin'>
+        登录</button>
+       </view>
+   </view>
+</view>

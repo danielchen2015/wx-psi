@@ -8,6 +8,7 @@ Page({
    */
   data: {
     goodsList: [],
+    submitList: [],
     storelist: [],
     templatelist: [],
     storeId: '',
@@ -20,7 +21,11 @@ Page({
     storeText: '',
     goodType: '',
     ordertime: '',
-    memo: ''
+    memo: '',
+    good: '',
+    savegoodList: [],
+    goodsId: '',
+    goodsText: ''
   },
 
   /**
@@ -28,8 +33,14 @@ Page({
    */
   onLoad: function(options) {
     let that = this;
-    let year = (new Date().getFullYear() + 1);
-    let time = util.formatTime(new Date());
+    let now = new Date();
+    let year = (now.getFullYear() + 1);
+    //console.log(now + 1);
+    //明天的时间
+    var day3 = new Date();
+    day3.setTime(day3.getTime() + 24 * 60 * 60 * 1000);
+    let time = day3.getFullYear() + "-" + (day3.getMonth() + 1) + "-" + day3.getDate();
+    //let time = util.formatTime(that.getDateStr(null, 1));
     let endTime = util.formatTime(new Date(year, '0', '0'));
     let startTime = time.split(" ")[0];
     that.setData({
@@ -96,6 +107,17 @@ Page({
       memo: e.detail.value
     })
   },
+  //物品搜索
+  goodsChange(e) {
+    let that = this;
+    let good = e.detail.value;
+    that.setData({
+      good: e.detail.value
+    })
+    //console.log(good)
+    //物品
+    that.getGoodsList('/api/org/goodslist?py=' + good)
+  },
   //选择门店
   storeChange(e) {
     let storeId = this.data.storelist[e.detail.value].id
@@ -114,11 +136,23 @@ Page({
   },
   //选择订单模板
   templateChange(e) {
+    //重新绑定物资数组
+    this.rebindData();
     let templateId = this.data.templatelist[e.detail.value].id
     this.getHuaList(templateId);
     this.setData({
       templateText: this.data.templatelist[e.detail.value].bill_memo,
       templateId,
+      goodType: e.detail.value
+    });
+  },
+  //选择商品列表
+  goodslistChange(e) {
+    let goodsId = this.data.searchgoodsList[e.detail.value].id
+    //this.getHuaList(goodsId);
+    this.setData({
+      goodsText: this.data.searchgoodsList[e.detail.value].good_memo,
+      goodsId,
       goodType: e.detail.value
     })
   },
@@ -132,7 +166,7 @@ Page({
     let num = this.data.goodsList.findIndex((item) => {
       return item.goods_id == code
     })
-    
+
     this.data.goodsList.splice(num, 1);
     this.setData({
       goodsList: this.data.goodsList
@@ -148,10 +182,12 @@ Page({
         id: id
       },
       success: function(res) {
+        //向后--用this.data.list与newarray合拼
+        that.data.goodsList = that.data.goodsList.concat(res.data);
         if (res.code == 200) {
           that.setData({
-            goodsList: res.data
-          })
+            'goodsList': that.data.goodsList
+          });
         } else {
           console.log("错误请求")
         }
@@ -183,16 +219,56 @@ Page({
       method: "GET",
       success: function(res) {
         if (res.code == 200) {
-          
           that.setData({
             templatelist: res.data
           })
-
         } else {
           console.log("请求接口错误")
         }
       }
     })
+  },
+  //物品搜索列表
+  getGoodsList(url) {
+    let that = this;
+    http({
+      url: url,
+      method: "GET",
+      success: function(res) {
+        //console.log(res)
+        if (res.code == 200) {
+          that.setData({
+            searchgoodsList: res.data
+          })
+        } else {
+          console.log("请求接口错误")
+        }
+      }
+    })
+  },
+  // 获取选中推荐列表中的值
+  selectGoodsid: function(res) {
+    //console.log(res.currentTarget.dataset.index, res.currentTarget.dataset.name);
+    let that = this;
+    http({
+      url: "api/org/goodsdetails",
+      method: "GET",
+      data: {
+        goodname: res.currentTarget.dataset.name
+      },
+      success: function(res) {
+        that.data.goodsList = that.data.goodsList.concat(res.data);
+        if (res.code == 200) {
+          that.setData({
+            'goodsList': that.data.goodsList
+          });
+        } else {
+          console.log("错误请求")
+        }
+      }
+    })
+    //重新绑定物资数组
+    that.rebindData();
   },
   //添加数量
   dataChange(e) {
@@ -204,9 +280,39 @@ Page({
       }
     })
     this.setData({
-      goodsList: this.data.goodsList
+      'goodsList': this.data.goodsList
     })
+  },
+  rebindData() {
+    let carts = this.data.goodsList;
+    console.log(carts);
+    //删除数据某一成员
+    var array = [];
+    for (let i = 0; i < carts.length; i++) {
+      if (carts[i].goods_count>0){
+        array.push(carts[i]);
+      }
+    }
+    this.setData({
+      'goodsList': array
+    });
+    // for (let i = 0; i < carts.length; i++) {
+    //   // 如果item是选中的话，就删除它。
+    //   console.log(carts.length + "--" + carts[i].goods_count);
+    //   if (carts[i].goods_count == 0 || carts[i].goods_count == 'undefined' || typeof(carts[i].goods_count) == "undefined") {
+    //     let num = carts.findIndex((item) => {
+    //       return item.goods_id == carts[i].goods_id
+    //     })
 
+    //     carts.splice(num, 1);
+    //     console.log(i + "---i");
+    //     console.log(carts.length + "---goodsList.length");
+    //   }
+    // }
+    // this.setData({
+    //   'goodsList': carts
+    // });
+    console.log(this.data.goodsList);
   },
   //提交数据
   submitData() {
@@ -216,26 +322,33 @@ Page({
     let ordertime = this.data.ordertime || this.datetime_to_unix(this.data.selectTime);
     let items = this.data.goodsList;
     let memo = this.data.memo;
+    let userId = getApp().globalData.id;
     let data = {
       template_id: templateId,
       company_id: storeId,
+      user_id: userId,
       memo,
       ordertime,
       items
     }
-    if (!this.data.storeText && !this.data.templateText){      
-        return false;
+    if (!this.data.storeText && !this.data.templateText) {
+      //return false;
     }
-    http({
-      url: '/api/org/orderAdd',
-      method: "GET",
+    console.log(data);
+    wx.request({
+      url: 'https://www.notmenu.com/web/api/org/orderAdd',
+      method: "POST",
       data: {
-        data
+        data: JSON.stringify(data)
       },
-      success: function (res) {
-        if (res.code == 200) {
+      header: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      success: function(res) {
+        console.log(res.data);
+        if (res.data.code == 200) {
           wx.showModal({
-            showCancel:false,
+            showCancel: false,
             title: '订单成功',
             success(res) {
               if (res.confirm) {
@@ -248,9 +361,8 @@ Page({
         } else {
           console.log("接口错误")
         }
-      }
+      },
     })
-
   },
   // ListTouch触摸开始
   ListTouchStart(e) {
