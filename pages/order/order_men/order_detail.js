@@ -9,6 +9,7 @@ Page({
   data: {
     orderList: [],
     orderId: '',
+    storeId: '',
     goodsCount: ''
   },
 
@@ -19,8 +20,10 @@ Page({
     let that = this;
     console.log(options);
     let orderId = options.orderId;
+    let storeId = options.storeId;
     that.setData({
-      orderId: options.orderId
+      orderId: options.orderId,
+      storeId: options.storeId
     })
     //订单物品列表
     that.getOrderList('api/org/orderdetails?orderId=' + orderId);
@@ -97,7 +100,7 @@ Page({
     this.data.orderList.map((item) => {
       if (item.id == code) {
         item.ld_goods_count = num;
-        item.cha_count = num - item.goods_count;
+        item.cha_count = item.goods_count - num;
       }
     })
     this.setData({
@@ -109,10 +112,12 @@ Page({
   submitData() {
     let that = this;
     let orderId = this.data.orderId;
+    let storeId = this.data.storeId;
     let items = this.data.orderList;
     let userId = getApp().globalData.id;
     let data = {
       orderId: orderId,
+      company_id: storeId,
       user_id: userId,
       items
     }
@@ -129,7 +134,7 @@ Page({
       header: {
         "Content-Type": "application/x-www-form-urlencoded"
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data);
         if (res.data.code == 200) {
           wx.showModal({
@@ -144,7 +149,11 @@ Page({
             }
           })
         } else {
-          console.log("接口错误")
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: res.data.msg,
+          })
         }
       },
     })

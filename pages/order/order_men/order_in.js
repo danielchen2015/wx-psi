@@ -233,10 +233,10 @@ Page({
   // 获取选中推荐列表中的值
   selectOrdersid: function (res) {
     //console.log(res.currentTarget.dataset.index, res.currentTarget.dataset.name);
-    console.log(res.currentTarget.dataset.name);
+    //console.log(res.currentTarget.dataset.name);
     //跳转页面
     wx.navigateTo({
-      url: '/pages/order/order_men/order_detail?orderId=' + res.currentTarget.dataset.name
+      url: '/pages/order/order_men/order_detail?orderId=' + res.currentTarget.dataset.name + '&storeId=' + this.data.storeId
     })
   },
   //转化时间戳
