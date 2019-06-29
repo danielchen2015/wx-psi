@@ -1,2 +1,57 @@
-<!--pages/order/order_men/order_in.wxml-->
-<text>pages/order/order_men/order_in.wxml</text>
+<view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg">
+    <view class="cu-form-group">
+      <view class='title'>订货门店</view>
+      <picker bindchange="storeChange" range="{{storelist}}" range-key="{{'name'}}">
+        <view class="picker text-grey">
+          {{storeText||'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>供应商</view>
+      <picker bindchange="templateChange" range="{{templatelist}}" range-key="{{'name'}}">
+        <view class="picker text-grey">
+          {{ templateText|| '请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>到货时间</view>
+      <picker bindchange="timeChange" mode="date" start="{{startTime}}" end="{{endTime}}">
+        <view class="picker text-grey">
+          {{selectTime ||'请选择'}}
+        </view>
+      </picker>
+    </view>
+    <view class="cu-form-group">
+      <view class='title'>至</view>
+      <picker bindchange="endtimeChange" mode="date" start="{{endTime}}" end="{{endTime}}">
+        <view class="picker text-grey">
+          {{endselectTime ||'请选择'}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="padding flex flex-direction">
+    <button class='cu-btn bg-blue margin-tb-sm lg' catchtap='submitData'>订单查询</button>
+  </view>
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='text-orange'>订单列表(共{{goodsList.length}})笔</text>
+    </view>
+  </view>
+  <view class="weui-cells searchbar-result">
+    <!-- 搜索列表 -->
+    <view class="weui-cell__bd" wx:for="{{goodsList}}" wx:key="key">
+      <!-- 列表名称 -->
+      <view class='list_name' data-index='{{index}}' data-name='{{item.id}}' bindtap='selectOrdersid'>
+        <!-- 昵称 -->
+        <label class="list_item_label">销-{{item.ref}}</label>
+        <label class="list_item_label">{{item.org_name}}</label>
+        <label class="list_item_label">发:{{item.fromtime}} {{item.fromorgname}} {{item.fromuser}}</label>
+        <label class="list_item_label">要:{{item.gettime}} {{item.getorgname}} {{item.getuser}}</label>
+      </view>
+    </view>
+  </view>
+</view>

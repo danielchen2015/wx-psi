@@ -12,18 +12,18 @@
       </navigator>
     </view>
     <view class="cu-item order-item">
-      <navigator url="/pages/order/user/user" hover-class="none">
-        <image mode='aspectFit' src='/images/order/user.png' class='imgIcon'></image>
-        <text>查询员工信息</text>
-        </navigator>
-    </view>
-    <view class="cu-item order-item">
       <navigator url="/pages/order/order_men/order_in">
       <view class='imgIcon'>
         <image mode='aspectFit' src='/images/order/orderin.png'></image>
       </view>
       <text>发货</text>
       </navigator>
+    </view>
+    <view class="cu-item order-item">
+      <navigator url="/pages/order/user/user" hover-class="none">
+        <image mode='aspectFit' src='/images/order/user.png' class='imgIcon'></image>
+        <text>查询员工信息</text>
+        </navigator>
     </view>
     <view wx:if="{{false}}" class="cu-item order-item">
       <view class='imgIcon'>

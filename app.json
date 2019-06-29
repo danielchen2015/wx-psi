@@ -4,6 +4,7 @@
     "pages/order/order",
     "pages/order/order_men/order_men",
     "pages/order/order_men/order_in",
+    "pages/order/order_men/order_detail",
     "pages/order/user/user",
     "pages/order/detail/detail",
     "pages/test/test",
