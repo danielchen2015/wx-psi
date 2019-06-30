@@ -41,15 +41,18 @@ Page({
     let year = (now.getFullYear() + 1);
     //console.log(now + 1);
     //明天的时间
-    var day3 = new Date();
-    day3.setTime(day3.getTime() - 24 * 60 * 60 * 1000 * 30);
-    let time = day3.getFullYear() + "-" + (day3.getMonth() + 1) + "-" + day3.getDate();
-    //let time = util.formatTime(that.getDateStr(null, 1));
-    let endTime = util.formatTime(new Date(year, '0', '0'));
-    let startTime = time.split(" ")[0];
+    var s1 = new Date();
+    s1.setTime(s1.getTime());
+    var s2 = new Date();
+    s2.setTime(s2.getTime() + 24 * 60 * 60 * 1000);
+    let st = s1.getFullYear() + "-" + (s1.getMonth() + 1) + "-" + s1.getDate();
+    let et = s2.getFullYear() + "-" + (s2.getMonth() + 1) + "-" + s2.getDate();
+    //let endTime = util.formatTime(new Date(year, '0', '0'));
+    let startTime = st.split(" ")[0];
+    let endTime = et.split(" ")[0];
     that.setData({
-      endTime,
-      startTime,
+      startTime: startTime,
+      endTime: endTime,
       selectTime: startTime,
       endselectTime: startTime
     })
@@ -219,7 +222,7 @@ Page({
         from_date: ordertime,
         to_date: endordertime
       },
-      success: function (res) {
+      success: function(res) {
         if (res.code == 200) {
           that.setData({
             goodsList: res.data
@@ -231,7 +234,7 @@ Page({
     })
   },
   // 获取选中推荐列表中的值
-  selectOrdersid: function (res) {
+  selectOrdersid: function(res) {
     //console.log(res.currentTarget.dataset.index, res.currentTarget.dataset.name);
     //console.log(res.currentTarget.dataset.name);
     //跳转页面

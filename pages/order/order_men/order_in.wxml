@@ -26,7 +26,7 @@
     </view>
     <view class="cu-form-group">
       <view class='title'>至</view>
-      <picker bindchange="endtimeChange" mode="date" start="{{endTime}}" end="{{endTime}}">
+      <picker bindchange="endtimeChange" mode="date" start="{{startTime}}" end="{{endTime}}">
         <view class="picker text-grey">
           {{endselectTime ||'请选择'}}
         </view>
