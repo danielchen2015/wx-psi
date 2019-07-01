@@ -20,10 +20,12 @@
       </navigator>
     </view>
     <view class="cu-item order-item">
-      <view class='imgIcon'>
-        <image mode='aspectFit' src='/images/order/pandian.png'></image>
-      </view>
-      <text>盘点</text>
+      <navigator url="/pages/order/order_men/order_pandian">
+        <view class='imgIcon'>
+          <image mode='aspectFit' src='/images/order/pandian.png'></image>
+        </view>
+        <text>盘点</text>
+      </navigator>
     </view>
     <view class="cu-item order-item">
       <view class='imgIcon'>
