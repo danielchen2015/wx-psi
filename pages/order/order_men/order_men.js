@@ -43,10 +43,15 @@ Page({
     //let time = util.formatTime(that.getDateStr(null, 1));
     let endTime = util.formatTime(new Date(year, '0', '0'));
     let startTime = time.split(" ")[0];
+    let storeText = getApp().globalData.org_name;
+    let storeId = getApp().globalData.org_id;
+    //console.log(storeText);
     that.setData({
       endTime,
       startTime,
-      selectTime: startTime
+      selectTime: startTime,
+      storeText: getApp().globalData.org_name,
+      storeId: getApp().globalData.org_id
     })
     //获取门店
     that.getStoreList('api/org/storelist')
@@ -289,29 +294,14 @@ Page({
     //删除数据某一成员
     var array = [];
     for (let i = 0; i < carts.length; i++) {
-      if (carts[i].goods_count>0){
+      if (carts[i].goods_count > 0) {
         array.push(carts[i]);
       }
     }
     this.setData({
       'goodsList': array
     });
-    // for (let i = 0; i < carts.length; i++) {
-    //   // 如果item是选中的话，就删除它。
-    //   console.log(carts.length + "--" + carts[i].goods_count);
-    //   if (carts[i].goods_count == 0 || carts[i].goods_count == 'undefined' || typeof(carts[i].goods_count) == "undefined") {
-    //     let num = carts.findIndex((item) => {
-    //       return item.goods_id == carts[i].goods_id
-    //     })
 
-    //     carts.splice(num, 1);
-    //     console.log(i + "---i");
-    //     console.log(carts.length + "---goodsList.length");
-    //   }
-    // }
-    // this.setData({
-    //   'goodsList': carts
-    // });
     console.log(this.data.goodsList);
   },
   //提交数据
@@ -331,8 +321,31 @@ Page({
       ordertime,
       items
     }
-    if (!this.data.storeText && !this.data.templateText) {
-      //return false;
+    if (!this.data.storeText || !this.data.storeId) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择订货门店',
+        showCancel: false
+      });
+      return false;
+    }
+
+    let bitems = false;
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].goods_count > 0) {
+        bitems = true;
+        break;
+      }
+    }
+    console.log(items.length);
+
+    if (bitems == false || items.length == 0) {
+      wx.showModal({
+        title: '提示',
+        content: '请添加订货物品并且填写物品数量',
+        showCancel: false
+      });
+      return false;
     }
     console.log(data);
     wx.request({

@@ -54,7 +54,9 @@ Page({
       startTime: startTime,
       endTime: endTime,
       selectTime: startTime,
-      endselectTime: startTime
+      endselectTime: startTime,
+      storeText: getApp().globalData.org_name,
+      storeId: getApp().globalData.org_id
     })
     //获取门店
     that.getStoreList('api/org/storelist')
@@ -208,8 +210,21 @@ Page({
       from_date: ordertime,
       to_date: endordertime
     }
-    if (!this.data.storeText && !this.data.templateText) {
-      //return false;
+    if (!this.data.storeText || !this.data.storeId) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择订货门店',
+        showCancel: false
+      });
+      return false;
+    }
+    if (!this.data.templateText || !this.data.templateId) {
+      wx.showModal({
+        title: '提示',
+        content: '请选择供应商',
+        showCancel: false
+      });
+      return false;
     }
     console.log(data);
     http({

@@ -141,6 +141,11 @@ Page({
           getApp().globalData.id = data[0].id;
           getApp().globalData.companyid = data[0].company_id;
           getApp().globalData.username = data[0].name;
+          getApp().globalData.org_id = data[0].org_id;
+          getApp().globalData.org_code = data[0].org_code;
+          getApp().globalData.data_org = data[0].data_org;
+          getApp().globalData.org_name = data[0].org_name;
+          console.log(getApp().globalData.org_name);
          that.setData({
            loginShow: false
          })
