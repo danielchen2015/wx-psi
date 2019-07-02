@@ -22,7 +22,7 @@
         <view class="td">{{item.goods_name}}</view>
         <view class="td">{{item.goods_count}}</view>
         <view class="td">
-          <input type="digit" bindinput="dataChange" data-good="{{item.id}}" placeholder="请输入需要的数量" class="input-number" name='input' type="number" value="{{item.ld_goods_count}}"></input>
+          <input type="digit" bindinput="dataChange" data-good="{{item.id}}" placeholder="请输入需要的数量" class="input-number" name='input' value="{{item.ld_goods_count}}"></input>
         </view>
         <view class="td">{{item.cha_count}}</view>
       </view>
@@ -30,7 +30,7 @@
         <view class="td">{{item.goods_name}}</view>
         <view class="td">{{item.goods_count}}</view>
         <view class="td">
-          <input type="digit" bindinput="dataChange" data-good="{{item.id}}" placeholder="请输入需要的数量" class="input-number" name='input' type="number" value="{{item.ld_goods_count}}"></input>
+          <input type="digit" bindinput="dataChange" data-good="{{item.id}}" placeholder="请输入需要的数量" class="input-number" name='input' value="{{item.ld_goods_count}}"></input>
         </view>
         <view class="td">{{item.cha_count}}</view>
       </view>

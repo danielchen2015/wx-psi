@@ -58,7 +58,7 @@
       <view class="goods-title">
         <view>{{item.name}}</view>
         <view class="m-l-10">
-          <input type="digit" bindinput="dataChange" data-good="{{item.goods_id}}" placeholder="请输入需要的数量" class="input-number" name='input' type="number"></input>
+          <input type="digit" bindinput="dataChange" data-good="{{item.goods_id}}" placeholder="请输入需要的数量" class="input-number" name='input'></input>
         </view>
         <view>/{{item.unit_name}}</view>
       </view>
