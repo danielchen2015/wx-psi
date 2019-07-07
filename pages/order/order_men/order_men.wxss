@@ -8,6 +8,31 @@
   margin-left: 20rpx;
 }
 
+.imgIcon{
+  width: 60rpx;
+  height: 60rpx;
+  padding-left: 1rpx;
+  padding-top: 2rpx;
+  padding-bottom: 2rpx;
+}
+
+.imgIcon image{
+  height: 60rpx;
+}
+
+.td1 {
+  width: 60%;
+  justify-content: left;
+  text-align: left;
+}
+
+.td2 {
+  width: 20%;
+  justify-content: center;
+  text-align: center;
+}
+
+
 /*!
  * WeUI v1.1.1 (https://github.com/weui/weui-wxss)
  * Copyright 2017 Tencent, Inc.

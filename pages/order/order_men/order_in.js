@@ -218,14 +218,14 @@ Page({
       });
       return false;
     }
-    if (!this.data.templateText || !this.data.templateId) {
-      wx.showModal({
-        title: '提示',
-        content: '请选择供应商',
-        showCancel: false
-      });
-      return false;
-    }
+    // if (!this.data.templateText || !this.data.templateId) {
+    //   wx.showModal({
+    //     title: '提示',
+    //     content: '请选择供应商',
+    //     showCancel: false
+    //   });
+    //   return false;
+    // }
     console.log(data);
     http({
       url: "api/org/orderlist",
@@ -242,8 +242,19 @@ Page({
           that.setData({
             goodsList: res.data
           });
+          if (that.data.goodsList.length == 0) {
+            wx.showModal({
+              showCancel: false,
+              title: '提示',
+              content: '总仓尚未发货',
+            })
+          }
         } else {
-          console.log("错误请求")
+          wx.showModal({
+            showCancel: false,
+            title: '提示',
+            content: '总仓尚未发货',
+          })
         }
       }
     })

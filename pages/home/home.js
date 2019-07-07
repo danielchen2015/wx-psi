@@ -6,9 +6,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    loginShow:true,
-    username:"",
-    password:"",
+    loginShow: true,
+    username: "",
+    password: "",
     iconList: [{
       icon: 'cardboardfill',
       color: 'red',
@@ -65,79 +65,82 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     wx.hideTabBar({})
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-    
+  onReady: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-    
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-    
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-    
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-    
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-    
+  onShareAppMessage: function() {
+
   },
-  handUsername(e){
+  handUsername(e) {
     this.setData({
       username: e.detail.value
     })
   },
-  handPassword(e){
+  handPassword(e) {
     this.setData({
       password: e.detail.value
     })
   },
-  handLogin(){
+  handLogin() {
     let that = this;
     http({
       url: '/api/user/login',
-      data:{
+      data: {
         username: that.data.username,
         password: that.data.password
       },
-      success: function(res){
-        let { code,data} = res;
-        if(code == 200 && data.length){
+      success: function(res) {
+        let {
+          code,
+          data
+        } = res;
+        if (code == 200 && data.length) {
           getApp().globalData.id = data[0].id;
           getApp().globalData.companyid = data[0].company_id;
           getApp().globalData.username = data[0].name;
@@ -145,14 +148,14 @@ Page({
           getApp().globalData.org_code = data[0].org_code;
           getApp().globalData.data_org = data[0].data_org;
           getApp().globalData.org_name = data[0].org_name;
-          console.log(getApp().globalData.org_name);
-         that.setData({
-           loginShow: false
-         })
+          //console.log(getApp().globalData.org_name);
+          that.setData({
+            loginShow: false
+          })
           wx.showModal({
             title: '提示',
             content: '登录成功',
-            showCancel:false,
+            showCancel: false,
             success(res) {
               if (res.confirm) {
                 wx.switchTab({
@@ -161,11 +164,22 @@ Page({
               }
             }
           })
-         
+
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '登录失败,用户名或密码错误',
+            showCancel: false,
+            success(res) {
+              if (res.confirm) {
+
+              }
+            }
+          })
         }
-       
+
       },
-      fail: function(){
+      fail: function() {
         getApp().globalData.id = "";
         getApp().globalData.companyid = "";
       }

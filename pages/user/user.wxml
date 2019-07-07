@@ -1,3 +1,10 @@
-<view>
-  <text>user页面</text>
+<!--pages/user/user.wxml-->
+<view class="active-bg">
+  <view>
+    <view class="padding-xl">
+      <button class="cu-btn block bg-blue margin-tb-sm lg" bindtap="exitSys">
+        <text class="iconfont-spin"></text> 退出
+      </button>
+    </view>
+  </view>
 </view>

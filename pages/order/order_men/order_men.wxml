@@ -29,7 +29,7 @@
       <input placeholder="请填写未添加的物品" class='radius' name='input' bindinput="goodsChange" value="{{good}}"></input>
     </view>
     <view class="cu-form-group">
-      <view class='title'>收货地址</view>
+      <view class='title'>备注</view>
       <input placeholder="请输入你的备注信息" class='radius' name='input' bindinput="memoChange"></input>
     </view>
     <view class="weui-cells searchbar-result" wx:if="{{good.length>0}}">
@@ -44,28 +44,28 @@
     </view>
   </view>
 
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class='action'>
+      <text class='text-orange'>物品列表(共{{goodsList.length}}笔)</text>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item" wx:for="{{goodsList}}" wx:key="goods_id" data-target="move-box-{{index}}">
+      <view class="goods-title">
+		<view class='imgIcon'>
+          <image mode='aspectFit' src='/images/order/delete.png' data-code="{{item.goods_id}}" bindtap='deleGoods'></image>
+        </view>
+        <view class="td1">{{item.name}}</view>
+        <view class="td2">{{item.unit_name}}</view>
+        <view class="td2">
+          <input type="digit" bindinput="dataChange" data-good="{{item.goods_id}}" placeholder="数量" class="input-number" name='input'></input>
+        </view>
+      </view>
+    </view>
+  </view>
+
   <view class="padding flex flex-direction">
     <button class='cu-btn bg-blue margin-tb-sm lg' catchtap='submitData'>提交订单</button>
   </view>
 
-  <view class="cu-bar bg-white solid-bottom margin-top">
-    <view class='action'>
-      <text class='text-orange'>物品列表-(右边滑动删除)</text>
-    </view>
-  </view>
-  <view class="cu-list menu">
-    <view class="cu-item {{modalName=='move-box-'+ index?'move-cur':''}}" wx:for="{{goodsList}}" wx:key="goods_id" bindtouchstart='ListTouchStart' bindtouchmove='ListTouchMove' bindtouchend='ListTouchEnd' data-target="move-box-{{index}}">
-      <view class="goods-title">
-        <view>{{item.name}}</view>
-        <view class="m-l-10">
-          <input type="digit" bindinput="dataChange" data-good="{{item.goods_id}}" placeholder="请输入需要的数量" class="input-number" name='input'></input>
-        </view>
-        <view>/{{item.unit_name}}</view>
-      </view>
-      <view class='move'>
-        <!-- <view class='bg-grey'>置顶</view> -->
-        <view class="bg-red" data-code="{{item.goods_id}}" catchtap="deleGoods">删除</view>
-      </view>
-    </view>
-  </view>
 </view>

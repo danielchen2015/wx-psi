@@ -8,7 +8,7 @@
         </view>
       </picker>
     </view>
-    <view class="cu-form-group">
+    <view class="cu-form-group" wx:if="{{false}}">
       <view class='title'>供应商</view>
       <picker bindchange="templateChange" range="{{templatelist}}" range-key="{{'name'}}">
         <view class="picker text-grey">
@@ -18,7 +18,7 @@
     </view>
     <view class="cu-form-group">
       <view class='title'>到货时间</view>
-      <picker bindchange="timeChange" mode="date" start="{{startTime}}" end="{{endTime}}">
+      <picker bindchange="timeChange" mode="date">
         <view class="picker text-grey">
           {{selectTime ||'请选择'}}
         </view>
@@ -26,7 +26,7 @@
     </view>
     <view class="cu-form-group">
       <view class='title'>至</view>
-      <picker bindchange="endtimeChange" mode="date" start="{{startTime}}" end="{{endTime}}">
+      <picker bindchange="endtimeChange" mode="date">
         <view class="picker text-grey">
           {{endselectTime ||'请选择'}}
         </view>
@@ -45,12 +45,10 @@
     <!-- 搜索列表 -->
     <view class="weui-cell__bd" wx:for="{{goodsList}}" wx:key="key">
       <!-- 列表名称 -->
-      <view class='list_name' data-index='{{index}}' data-name='{{item.id}}' bindtap='selectOrdersid'>
+      <view class='list_name' data-index='{{index}}' data-name='{{item.spobill_id}}' bindtap='selectOrdersid'>
         <!-- 昵称 -->
-        <label class="list_item_label">销-{{item.ref}}</label>
-        <label class="list_item_label">{{item.org_name}}</label>
-        <label class="list_item_label">发:{{item.fromtime}} {{item.fromorgname}} {{item.fromuser}}</label>
-        <label class="list_item_label">要:{{item.gettime}} {{item.getorgname}} {{item.getuser}}</label>
+        <label class="list_item_label">订：{{item.spobill_ref}} 订：{{item.to_warehouse_name}} {{item.to_user_name}}</label>
+        <label class="list_item_label">发：{{item.ref}} 发：{{item.from_warehouse_name}} {{item.input_user_name}}</label>
       </view>
     </view>
   </view>

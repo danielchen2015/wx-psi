@@ -1221,7 +1221,7 @@ icon {
   flex: 1;
   flex-direction: column;
   font-size: 12px;
-  height: 240rpx;
+  height: 160rpx;
   justify-content: space-between;
   border-bottom: 1rpx solid #ddd;
 }

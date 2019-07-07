@@ -365,8 +365,8 @@ Page({
             title: '订单成功',
             success(res) {
               if (res.confirm) {
-                wx.switchTab({
-                  url: '/pages/order/order'
+                wx.redirectTo({
+                  url: '/pages/order/order_men/order_men',
                 })
               }
             }
